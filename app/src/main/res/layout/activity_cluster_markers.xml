@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.amap.api.maps.MapView
+        android:id="@+id/map_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></com.amap.api.maps.MapView>
+
+    <TextView
+        android:id="@+id/tv_add_markers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@color/colorAccent"
+        android:padding="5dp"
+        android:text="添加海量点" />
+
+    <TextView
+        android:id="@+id/tv_cluster_open"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_add_markers"
+        android:layout_margin="5dp"
+        android:background="@color/colorAccent"
+        android:padding="5dp"
+        android:text="开启聚合" />
+
+    <TextView
+        android:id="@+id/tv_cluster_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_cluster_open"
+        android:layout_margin="5dp"
+        android:background="@color/colorAccent"
+        android:padding="5dp"
+        android:text="关闭聚合" />
+
+    <TextView
+        android:id="@+id/tv_cluster_again"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_cluster_close"
+        android:layout_margin="5dp"
+        android:background="@color/colorAccent"
+        android:padding="5dp"
+        android:text="重新设置" />
+</RelativeLayout>
