@@ -1,4 +1,4 @@
-package com.hfjs.amapcardemo;
+package com.hfjs.amapcardemo.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -21,6 +21,8 @@ import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.Polyline;
 import com.amap.api.maps.model.PolylineOptions;
 import com.amap.api.maps.utils.SpatialRelationUtil;
+import com.hfjs.amapcardemo.MoveMarkers;
+import com.hfjs.amapcardemo.R;
 import com.jaredrummler.android.colorpicker.ColorPickerDialog;
 import com.jaredrummler.android.colorpicker.ColorPickerDialogListener;
 import com.jaredrummler.android.colorpicker.ColorShape;

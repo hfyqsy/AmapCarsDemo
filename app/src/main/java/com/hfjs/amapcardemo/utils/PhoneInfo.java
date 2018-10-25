@@ -1,4 +1,4 @@
-package com.hfjs.amapcardemo;
+package com.hfjs.amapcardemo.utils;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

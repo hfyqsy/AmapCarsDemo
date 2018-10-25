@@ -1,7 +1,7 @@
 /**
  *
  */
-package com.hfjs.amapcardemo;
+package com.hfjs.amapcardemo.activity;
 
 import android.Manifest;
 import android.app.AlertDialog;

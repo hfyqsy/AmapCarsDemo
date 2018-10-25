@@ -112,7 +112,6 @@ public class MoveMarkers {
                 if (this.marker != null) {
                     this.marker.setAnimation((Animation)null);
                 }
-
                 this.STATUS = MoveMarkers.a.a;
             }
 

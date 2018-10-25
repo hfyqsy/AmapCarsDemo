@@ -1,4 +1,4 @@
-package com.hfjs.amapcardemo;
+package com.hfjs.amapcardemo.activity;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -15,6 +15,7 @@ import com.amap.api.maps.model.BitmapDescriptor;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.LatLngBounds;
 import com.amap.api.maps.model.Marker;
+import com.hfjs.amapcardemo.R;
 import com.hfjs.amapcardemo.clusters.Cluster;
 import com.hfjs.amapcardemo.clusters.ClusterClickListener;
 import com.hfjs.amapcardemo.clusters.ClusterItem;

@@ -1,4 +1,4 @@
-package com.hfjs.amapcardemo;
+package com.hfjs.amapcardemo.utils;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdateFactory;

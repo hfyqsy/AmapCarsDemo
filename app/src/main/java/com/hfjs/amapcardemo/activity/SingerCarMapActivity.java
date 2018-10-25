@@ -1,4 +1,4 @@
-package com.hfjs.amapcardemo;
+package com.hfjs.amapcardemo.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -14,9 +14,9 @@ import com.amap.api.maps.model.BitmapDescriptor;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
-import com.amap.api.maps.model.MarkerOptions;
-import com.amap.api.maps.model.Polyline;
 import com.amap.api.maps.model.PolylineOptions;
+import com.hfjs.amapcardemo.utils.MapUtils;
+import com.hfjs.amapcardemo.R;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import java.util.concurrent.TimeUnit;
