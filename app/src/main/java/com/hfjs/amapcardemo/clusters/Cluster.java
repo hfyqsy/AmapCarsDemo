@@ -1,4 +1,4 @@
-package com.hfjs.amapcardemo.Cluster;
+package com.hfjs.amapcardemo.clusters;
 
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;

@@ -1,10 +1,6 @@
-package com.hfjs.amapcardemo.Cluster;
+package com.hfjs.amapcardemo.clusters;
 
-import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
-import android.view.View;
-
-import com.amap.api.maps.model.BitmapDescriptor;
 
 /**
  * Created by yiyi.qi on 16/10/10.
@@ -17,7 +13,5 @@ public interface ClusterRender {
      * @param clusterNum
      * @return
      */
-    Drawable getDrawAble(int clusterNum);
-
-    BitmapDescriptor getView(String title);
+     Drawable getDrawAble(int clusterNum);
 }

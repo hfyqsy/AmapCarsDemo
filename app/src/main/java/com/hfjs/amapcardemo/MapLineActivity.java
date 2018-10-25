@@ -21,8 +21,6 @@ import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.Polyline;
 import com.amap.api.maps.model.PolylineOptions;
 import com.amap.api.maps.utils.SpatialRelationUtil;
-import com.amap.api.maps.utils.overlay.SmoothMoveMarker;
-import com.amap.api.services.core.LatLonPoint;
 import com.jaredrummler.android.colorpicker.ColorPickerDialog;
 import com.jaredrummler.android.colorpicker.ColorPickerDialogListener;
 import com.jaredrummler.android.colorpicker.ColorShape;

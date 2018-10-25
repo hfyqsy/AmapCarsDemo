@@ -20,7 +20,7 @@ public class MainActivity extends PermissionsActivity {
         List<Class> classList = new ArrayList<>();
         classList.add(MapLineActivity.class);
         classList.add(SingerCarMapActivity.class);
-        classList.add(ClusterMarkersActivity.class);
+        classList.add(ClusterActivity.class);
         ClassAdapter adapter = new ClassAdapter(R.layout.item_text, classList);
         RecyclerView mRecyclerView = findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -31,11 +31,11 @@ public class MainActivity extends PermissionsActivity {
 
 
 
-        PhoneInfo siminfo = new PhoneInfo(MainActivity.this);
-        System.out.println("getProvidersName:"+siminfo.getProvidersName());
-        System.out.println("getNativePhoneNumber:"+siminfo.getNativePhoneNumber());
-        System.out.println("------------------------");
-        System.out.println("getPhoneInfo:"+siminfo.getPhoneInfo());
+//        PhoneInfo siminfo = new PhoneInfo(MainActivity.this);
+//        System.out.println("getProvidersName:"+siminfo.getProvidersName());
+//        System.out.println("getNativePhoneNumber:"+siminfo.getNativePhoneNumber());
+//        System.out.println("------------------------");
+//        System.out.println("getPhoneInfo:"+siminfo.getPhoneInfo());
     }
 
     private void startActivity(Activity activity, Class aClass) {

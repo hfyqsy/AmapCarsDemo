@@ -1,4 +1,4 @@
-package com.hfjs.amapcardemo.Cluster;
+package com.hfjs.amapcardemo.clusters;
 
 import com.amap.api.maps.model.LatLng;
 
@@ -14,5 +14,9 @@ public interface ClusterItem {
      */
      LatLng getPosition();
 
-     String getTitle();
+    /**
+     * 点全部信息
+     * @return
+     */
+     LocationBean getLocationBean();
 }

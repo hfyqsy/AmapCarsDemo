@@ -32,7 +32,7 @@
         </activity>
         <activity android:name=".MapLineActivity" />
         <activity android:name=".SingerCarMapActivity" />
-        <activity android:name=".ClusterMarkersActivity" />
+        <activity android:name=".ClusterActivity"/>
 
         <meta-data
             android:name="com.amap.api.v2.apikey"
