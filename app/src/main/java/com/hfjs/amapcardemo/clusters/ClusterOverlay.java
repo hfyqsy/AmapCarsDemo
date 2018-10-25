@@ -165,6 +165,8 @@ public class ClusterOverlay implements AMap.OnCameraChangeListener, AMap.OnMarke
             marker.remove();
         }
         mAddMarkers.clear();
+        mClusters.clear();
+        mClusterItems.clear();
         mLruCache.evictAll();
         mViewLruCache.evictAll();
     }

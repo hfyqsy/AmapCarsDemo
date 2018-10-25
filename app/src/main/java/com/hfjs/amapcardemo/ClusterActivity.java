@@ -112,12 +112,12 @@ public class ClusterActivity extends RxAppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-//        if (mClusterOverlay != null) {
-//            mClusterItems.clear();
-//            mClusterOverlay.onDestroy();
-//            mClusterOverlay = null;
-//        }
-//        mAMap.clear();
+        if (mClusterOverlay != null) {
+            mClusterItems.clear();
+            mClusterOverlay.onDestroy();
+            mClusterOverlay = null;
+        }
+        mAMap.clear();
         mMapView.onDestroy();
     }
 
