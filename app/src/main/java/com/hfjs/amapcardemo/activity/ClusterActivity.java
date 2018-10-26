@@ -1,12 +1,16 @@
 package com.hfjs.amapcardemo.activity;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdateFactory;
@@ -52,7 +56,10 @@ public class ClusterActivity extends RxAppCompatActivity {
         mMapView = findViewById(R.id.map_view);
         mMapView.onCreate(savedInstanceState);
         mAMap = mMapView.getMap();
+        mAMap.setInfoWindowAdapter(infoWindowAdapter);//设置弹窗
+        mAMap.setOnInfoWindowClickListener(infoWindowClickListener);
         mAMap.animateCamera(CameraUpdateFactory.changeLatLng(new LatLng(31.206078, 121.602948)));
+
     }
 
     private void initView() {
@@ -82,11 +89,7 @@ public class ClusterActivity extends RxAppCompatActivity {
         });
 
         cluster.setOnClickListener(v -> {
-            if (mIsCluster) {
-                mIsCluster = false;
-            } else {
-                mIsCluster = true;
-            }
+            mIsCluster = !mIsCluster;
             mClusterOverlay.updateClusters(mIsCluster);
         });
     }
@@ -142,6 +145,7 @@ public class ClusterActivity extends RxAppCompatActivity {
         return (int) (dpValue * scale + 0.5f);
     }
 
+//*************************************添加聚合点*********************************************************************
 
     /**
      * 添加大量聚合点
@@ -162,7 +166,7 @@ public class ClusterActivity extends RxAppCompatActivity {
         } else {
             mClusterOverlay.setMorePoint(mClusterItems);
         }
-//        initMapBounds();
+        initMapBounds();
     }
 
     /**
@@ -189,8 +193,10 @@ public class ClusterActivity extends RxAppCompatActivity {
         RegionItem cluster = new RegionItem(latLng, bean);
         mClusterOverlay.addClusterItem(cluster);
     }
-
-
+//***********************************点击事件******************************************************
+    /**
+     * 聚合点 点击事件
+     */
     private ClusterClickListener clickListener = new ClusterClickListener() {
         @Override
         public void onClick(Marker marker, List<ClusterItem> clusterItems) {
@@ -199,15 +205,65 @@ public class ClusterActivity extends RxAppCompatActivity {
                 builder.include(clusterItem.getPosition());
             }
             LatLngBounds latLngBounds = builder.build();
-            mAMap.animateCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, 0));
+            mAMap.animateCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, 100));
         }
     };
-
+    /**
+     * 单个点击事件
+     */
     private ClusterItemClickListener itemClickListener = new ClusterItemClickListener() {
         @Override
         public void onClick(Marker marker, ClusterItem clusterItem) {
             Log.e("onClick: ", clusterItem.getLocationBean().getTitle());
+            marker.showInfoWindow();
+//            if (title!=null)title.setText(clusterItem.getLocationBean().getTitle());
             mAMap.animateCamera(CameraUpdateFactory.newLatLng(clusterItem.getPosition()));
+        }
+    };
+
+//***********************************弹窗**************************************************
+
+    AMap.InfoWindowAdapter infoWindowAdapter = new AMap.InfoWindowAdapter() {
+        @Override
+        public View getInfoWindow(Marker marker) {
+            Log.e("", marker.getId());
+            return getInfoWindowView(marker);
+        }
+
+        @Override
+        public View getInfoContents(Marker marker) {
+            return getInfoWindowView(marker);
+        }
+    };
+    private LinearLayout infoWindowLayout;
+    private TextView title;
+    /**
+     * 自定义View并且绑定数据方法
+     *
+     * @param marker 点击的Marker对象
+     * @return 返回自定义窗口的视图
+     */
+    private View getInfoWindowView(Marker marker) {
+        Cluster cluster = (Cluster) marker.getObject();
+       String  titles= cluster.getClusterItems().get(0).getLocationBean().getTitle();
+        Log.e( "getInfoWindowView: ", titles);
+        if (infoWindowLayout == null) {
+            infoWindowLayout = new LinearLayout(this);
+            infoWindowLayout.setOrientation(LinearLayout.VERTICAL);
+
+            title = new TextView(this);
+            title.setTextColor(Color.BLACK);
+
+            infoWindowLayout.setBackgroundResource(R.drawable.infowindow_bg);
+            infoWindowLayout.addView(title);
+        }
+        title.setText(titles);
+        return infoWindowLayout;
+    }
+
+    private AMap.OnInfoWindowClickListener infoWindowClickListener= marker -> {
+        if(marker.isInfoWindowShown()){
+            marker.hideInfoWindow();//这个是隐藏infowindow窗口的方法
         }
     };
 }

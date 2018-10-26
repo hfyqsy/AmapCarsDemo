@@ -46,7 +46,7 @@ public class Cluster {
         return mMarker;
     }
 
-    List<ClusterItem> getClusterItems() {
+    public List<ClusterItem> getClusterItems() {
         return mClusterItems;
     }
 }
