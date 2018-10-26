@@ -238,6 +238,7 @@ public class ClusterActivity extends RxAppCompatActivity {
     };
     private LinearLayout infoWindowLayout;
     private TextView title;
+
     /**
      * 自定义View并且绑定数据方法
      *
@@ -246,25 +247,38 @@ public class ClusterActivity extends RxAppCompatActivity {
      */
     private View getInfoWindowView(Marker marker) {
         Cluster cluster = (Cluster) marker.getObject();
-       String  titles= cluster.getClusterItems().get(0).getLocationBean().getTitle();
-        Log.e( "getInfoWindowView: ", titles);
-        if (infoWindowLayout == null) {
-            infoWindowLayout = new LinearLayout(this);
-            infoWindowLayout.setOrientation(LinearLayout.VERTICAL);
-
-            title = new TextView(this);
-            title.setTextColor(Color.BLACK);
-
-            infoWindowLayout.setBackgroundResource(R.drawable.infowindow_bg);
-            infoWindowLayout.addView(title);
-        }
-        title.setText(titles);
-        return infoWindowLayout;
+//        String titles = cluster.getClusterItems().get(0).getLocationBean().getTitle();
+//        Log.e("getInfoWindowView: ", titles);
+//        if (infoWindowLayout == null) {
+//            infoWindowLayout = new LinearLayout(this);
+//            infoWindowLayout.setOrientation(LinearLayout.VERTICAL);
+//
+//            title = new TextView(this);
+//            title.setTextColor(Color.BLACK);
+//
+//            infoWindowLayout.setBackgroundResource(R.drawable.infowindow_bg);
+//            infoWindowLayout.addView(title);
+//        }
+//        title.setText(titles);
+        return infoView(cluster.getClusterItems().get(0).getLocationBean());
     }
 
-    private AMap.OnInfoWindowClickListener infoWindowClickListener= marker -> {
-        if(marker.isInfoWindowShown()){
+    private AMap.OnInfoWindowClickListener infoWindowClickListener = marker -> {
+        if (marker.isInfoWindowShown()) {
             marker.hideInfoWindow();//这个是隐藏infowindow窗口的方法
         }
     };
+
+
+    private TextView mTitle;
+    private View view;
+
+    private View infoView(LocationBean bean) {
+        if (view == null) {
+            view = View.inflate(this, R.layout.view_marker_info, null);
+            mTitle=view.findViewById(R.id.tv_marker_title);
+        }
+        mTitle.setText(bean.getTitle());
+        return view;
+    }
 }
