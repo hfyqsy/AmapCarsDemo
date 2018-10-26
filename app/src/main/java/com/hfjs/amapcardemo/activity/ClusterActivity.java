@@ -134,6 +134,7 @@ public class ClusterActivity extends RxAppCompatActivity {
             LatLng latlng = new LatLng(lat, lon);
             latLngs.add(latlng);
         }
+
         return latLngs;
     }
 
