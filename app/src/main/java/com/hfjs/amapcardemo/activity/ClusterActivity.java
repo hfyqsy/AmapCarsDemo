@@ -34,7 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClusterActivity extends RxAppCompatActivity {
-    private Button add, point, clear, cluster;
+    private Button add, point, clear, cluster, list, open, close, cart;
     private MapView mMapView;
     private AMap mAMap;
     private ClusterOverlay mClusterOverlay;
@@ -67,6 +67,10 @@ public class ClusterActivity extends RxAppCompatActivity {
         point = findViewById(R.id.btn_2);
         clear = findViewById(R.id.btn_3);
         cluster = findViewById(R.id.btn_4);
+        list = findViewById(R.id.btn_5);
+        open = findViewById(R.id.btn_6);
+        close = findViewById(R.id.btn_7);
+        cart = findViewById(R.id.btn_8);
         setListener();
     }
 
@@ -91,6 +95,19 @@ public class ClusterActivity extends RxAppCompatActivity {
         cluster.setOnClickListener(v -> {
             mIsCluster = !mIsCluster;
             mClusterOverlay.updateClusters(mIsCluster);
+        });
+
+        list.setOnClickListener(v -> {
+
+        });
+        open.setOnClickListener(v -> {
+            getMarkers(new LatLng(31.206078, 121.602948));
+        });
+        close.setOnClickListener(v -> {
+            mClusterOverlay.hiedPopup();
+        });
+        cart.setOnClickListener(v -> {
+            getMarkers(new LatLng(31.211078, 121.611948));
         });
     }
 
@@ -134,6 +151,10 @@ public class ClusterActivity extends RxAppCompatActivity {
             LatLng latlng = new LatLng(lat, lon);
             latLngs.add(latlng);
         }
+        latLngs.add(new LatLng(31.206078, 121.602948));
+        latLngs.add(new LatLng(31.206079, 121.602948));
+        latLngs.add(new LatLng(31.211078, 121.611948));
+        latLngs.add(new LatLng(31.211078, 121.611948));
 
         return latLngs;
     }
@@ -217,7 +238,6 @@ public class ClusterActivity extends RxAppCompatActivity {
         public void onClick(Marker marker, ClusterItem clusterItem) {
             Log.e("onClick: ", clusterItem.getLocationBean().getTitle());
             marker.showInfoWindow();
-//            if (title!=null)title.setText(clusterItem.getLocationBean().getTitle());
             mAMap.animateCamera(CameraUpdateFactory.newLatLng(clusterItem.getPosition()));
         }
     };
@@ -236,8 +256,6 @@ public class ClusterActivity extends RxAppCompatActivity {
             return getInfoWindowView(marker);
         }
     };
-    private LinearLayout infoWindowLayout;
-    private TextView title;
 
     /**
      * 自定义View并且绑定数据方法
@@ -247,19 +265,7 @@ public class ClusterActivity extends RxAppCompatActivity {
      */
     private View getInfoWindowView(Marker marker) {
         Cluster cluster = (Cluster) marker.getObject();
-//        String titles = cluster.getClusterItems().get(0).getLocationBean().getTitle();
-//        Log.e("getInfoWindowView: ", titles);
-//        if (infoWindowLayout == null) {
-//            infoWindowLayout = new LinearLayout(this);
-//            infoWindowLayout.setOrientation(LinearLayout.VERTICAL);
-//
-//            title = new TextView(this);
-//            title.setTextColor(Color.BLACK);
-//
-//            infoWindowLayout.setBackgroundResource(R.drawable.infowindow_bg);
-//            infoWindowLayout.addView(title);
-//        }
-//        title.setText(titles);
+
         return infoView(cluster.getClusterItems().get(0).getLocationBean());
     }
 
@@ -276,9 +282,41 @@ public class ClusterActivity extends RxAppCompatActivity {
     private View infoView(LocationBean bean) {
         if (view == null) {
             view = View.inflate(this, R.layout.view_marker_info, null);
-            mTitle=view.findViewById(R.id.tv_marker_title);
+            mTitle = view.findViewById(R.id.tv_marker_title);
         }
         mTitle.setText(bean.getTitle());
         return view;
+    }
+
+    //***********************************************************************************************
+    private void getMarkers(LatLng latLng) {
+
+//        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+//        builder.include(latLng);
+//        LatLngBounds latLngBounds = builder.build();
+//        mAMap.animateCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, 100));
+//        mAMap.animateCamera(CameraUpdateFactory.changeLatLng(latLng));
+//        mAMap.animateCamera(CameraUpdateFactory.zoomTo(18));
+
+//        try {
+//            Thread.sleep(500);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        List<Marker> markers = mAMap.getMapScreenMarkers();
+//
+//        Log.e("Marker", markers.size() + "");
+//        for (Marker marker : markers) {
+////            if (latLng.equals(marker.getPosition()))
+////            Log.e("Marker", marker.getPosition() + "");
+//            if (latLng.toString().equals(marker.getTitle())) {
+//                marker.showInfoWindow();
+//                Log.e("getMarkers:--44---> ", marker.getTitle() + "");
+//                break;
+//            }
+//            Log.e("getMarkers:-----> ", marker.getTitle() + "");
+//        }
+//        popupMarker.showInfoWindow();
+        mClusterOverlay.showPopup(latLng);
     }
 }

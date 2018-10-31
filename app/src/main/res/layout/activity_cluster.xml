@@ -37,4 +37,32 @@
         android:layout_toRightOf="@id/btn_3"
         android:text="聚合" />
 
+    <Button
+        android:id="@+id/btn_5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/btn_1"
+        android:text="列表" />
+    <Button
+        android:id="@+id/btn_6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/btn_1"
+        android:layout_toRightOf="@id/btn_5"
+        android:text="显示弹窗" />
+    <Button
+        android:id="@+id/btn_7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/btn_1"
+        android:layout_toRightOf="@id/btn_6"
+        android:text="隐藏弹窗" />
+    <Button
+        android:id="@+id/btn_8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/btn_1"
+        android:layout_toRightOf="@id/btn_7"
+        android:text="切换" />
+
 </RelativeLayout>

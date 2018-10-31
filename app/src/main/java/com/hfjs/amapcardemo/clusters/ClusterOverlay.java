@@ -61,6 +61,9 @@ public class ClusterOverlay implements AMap.OnCameraChangeListener, AMap.OnMarke
     private int clusterSize;//记录聚合
     private float zoom = 0;//缩放等级
 
+    private LatLng point;
+    private Marker popupMarker;
+
     /**
      * 构造函数
      *
@@ -219,7 +222,7 @@ public class ClusterOverlay implements AMap.OnCameraChangeListener, AMap.OnMarke
      * 将聚合元素添加至地图上
      */
     private void addClusterToMap(List<Cluster> clusters) {
-
+        Log.e("addClusterToMap: ", clusters.size() + "");
         ArrayList<Marker> removeMarkers = new ArrayList<>();
         removeMarkers.addAll(mAddMarkers);
         AlphaAnimation alphaAnimation = new AlphaAnimation(1, 0);
@@ -245,11 +248,15 @@ public class ClusterOverlay implements AMap.OnCameraChangeListener, AMap.OnMarke
     private void addSingleClusterToMap(Cluster cluster) {
         LatLng latlng = cluster.getCenterLatLng();
         MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.anchor(0.5f, 0.5f).icon(getBitmapDes(cluster)).position(latlng);
+        markerOptions.anchor(0.1f, 0.5f).icon(getBitmapDes(cluster)).position(latlng);
         Marker marker = mAMap.addMarker(markerOptions);
         marker.setAnimation(mADDAnimation);
         marker.setObject(cluster);
-
+        //修改  添加通过latlng查找marker
+        if (point != null && point.toString().equals(latlng.toString())) {
+            popupMarker = marker;
+            marker.showInfoWindow();
+        }
         marker.startAnimation();
         cluster.setMarker(marker);
         mAddMarkers.add(marker);
@@ -358,7 +365,6 @@ public class ClusterOverlay implements AMap.OnCameraChangeListener, AMap.OnMarke
         int num = cluster.getClusterCount();
         if (num <= 1) {
             LocationBean bean = cluster.getClusterItems().get(0).getLocationBean();
-            Log.e( "getBitmapDes: ", bean.getTitle());
             BitmapDescriptor bitmapDescriptor = mViewLruCache.get(bean.getTitle());
             if (bitmapDescriptor == null) {
                 View view = View.inflate(mContext, R.layout.mark_layout, null);
@@ -544,6 +550,42 @@ public class ClusterOverlay implements AMap.OnCameraChangeListener, AMap.OnMarke
                     calculateSingleCluster(item);
                     break;
             }
+        }
+    }
+
+    //---------------------------------------------------------------------------------------------
+
+    /**
+     * 显示popupWindow
+     *
+     * @param latLng
+     */
+    public void showPopup(LatLng latLng) {
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        builder.include(latLng);
+        LatLngBounds latLngBounds = builder.build();
+        mAMap.animateCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, 100));
+        this.point = latLng;
+        assignClusters();
+    }
+
+    /**
+     * 隐藏popupWindow
+     */
+    public void hiedPopup() {
+        point = null;
+        if (popupMarker != null) {
+            popupMarker.hideInfoWindow();
+        }
+    }
+
+    /**
+     * 移除单个marker
+     */
+    public void removeMarker() {
+        if (popupMarker != null) {
+            popupMarker.remove();
+            popupMarker = null;
         }
     }
 }
